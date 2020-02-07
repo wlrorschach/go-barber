@@ -25,6 +25,10 @@ class User extends Model {
     return this; // sempre sera retornado o model que acabou de ser inicializado
   }
 
+  static associate(models) {
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
+  }
+
   checkPassword(password) {
     return bcrypt.compare(password, this.password_hash);
   }

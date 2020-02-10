@@ -5,10 +5,12 @@ import User from '../models/User';
 
 class ScheduleController {
   async index(req, res) {
-    const { page, date } = req.query;
+    const { page = 1, date } = req.query;
 
     try {
-      const checkProvider = await User.findOne({ where: { provider: true } });
+      const checkProvider = await User.findOne({
+        where: { provider: true, id: req.userId },
+      });
 
       if (!checkProvider) {
         return res.status(401).json({ error: 'Use is not a provider' });
@@ -39,7 +41,9 @@ class ScheduleController {
 
       return res.json(appointments);
     } catch (err) {
-      return res.status(500).json({ error: 'Error fetching schedule ' });
+      return res
+        .status(500)
+        .json({ error: `Error fetching schedule. Message error: ${err}` });
     }
   }
 }

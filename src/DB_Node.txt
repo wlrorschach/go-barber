@@ -1,0 +1,12 @@
+Criando uma associação entre tabelas pelo Sequelize
+	- No model
+		- Criar um metodo statico associate(models) // recebendo o model q sera passado pelo loader dos models
+		- Implementar o metodo incluido uma chamada para o metodo correspondente a associação, ex:
+			- belongsTo
+			- belongsToMany
+			- HasOne
+			- HasMany
+
+	- No loader da database
+		- executar mais um map na lista de models verificando se ele possui o metodo "associate" e se sim, passar para ele
+		os models da sua aplicacao

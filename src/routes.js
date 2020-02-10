@@ -15,26 +15,47 @@ import multerConfig from './config/multer';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+/**
+ * SESSION
+ */
 routes.post('/sessions', SessionController.store);
 
+/**
+ * USER
+ */
 routes.post('/users', UserController.store);
 
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 
+/**
+ * PROVIDER
+ */
 routes.get('/providers', ProviderController.index);
 
+/**
+ * FILE
+ */
 routes.post('/files', upload.single('file'), FileController.store);
 
+/**
+ * APPOINTMENT
+ */
 routes.post('/appointments', AppointmentController.store);
 
 routes.get('/appointments', AppointmentController.index);
 
 routes.delete('/appointments/:id', AppointmentController.delete);
 
+/**
+ * SCHEDULE
+ */
 routes.get('/schedule', ScheduleController.index);
 
+/**
+ * NOTIFICATION
+ */
 routes.get('/notifications', NotificationController.index);
 
 routes.put('/notifications/:id', NotificationController.update);
